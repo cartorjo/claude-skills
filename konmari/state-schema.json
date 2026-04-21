@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "konmari-state",
+  "title": "Konmari skill session state",
+  "description": "Written by the konmari skill after each category's approval decision. Git-ignored. Enables resuming a partial pass across sessions.",
+  "type": "object",
+  "required": [
+    "session_id",
+    "started_at",
+    "ecosystem",
+    "completed_categories",
+    "current_category",
+    "totals"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "session_id": {
+      "type": "string",
+      "description": "UUID or timestamp-based identifier for this pass."
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the pass began."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of the last state write."
+    },
+    "ecosystem": {
+      "type": "array",
+      "description": "Detectors loaded for this pass.",
+      "items": {
+        "type": "string",
+        "enum": ["liquid", "node", "python", "rust", "go"]
+      }
+    },
+    "completed_categories": {
+      "type": "array",
+      "description": "Category numbers (1-5) that have been either applied or skipped.",
+      "items": { "type": "integer", "minimum": 1, "maximum": 5 },
+      "uniqueItems": true
+    },
+    "current_category": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 6,
+      "description": "Next category to process. 6 means the pass is complete."
+    },
+    "totals": {
+      "type": "object",
+      "description": "Running totals across completed categories.",
+      "required": ["kept", "simplified", "released", "kept_on_purpose"],
+      "additionalProperties": false,
+      "properties": {
+        "kept": { "type": "integer", "minimum": 0 },
+        "simplified": { "type": "integer", "minimum": 0 },
+        "released": { "type": "integer", "minimum": 0 },
+        "kept_on_purpose": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "commits": {
+      "type": "array",
+      "description": "Commit shas produced by this pass, in order.",
+      "items": {
+        "type": "object",
+        "required": ["category", "sha"],
+        "additionalProperties": false,
+        "properties": {
+          "category": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "sha": { "type": "string", "pattern": "^[0-9a-f]{7,40}$" }
+        }
+      }
+    },
+    "deferred": {
+      "type": "array",
+      "description": "Items the user asked to defer. Carried into the final report's 'Known remaining' section.",
+      "items": {
+        "type": "object",
+        "required": ["category", "path", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "category": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "path": { "type": "string" },
+          "reason": { "type": "string" }
+        }
+      }
+    }
+  }
+}

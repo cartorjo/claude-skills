@@ -1,0 +1,7 @@
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Skills' resume state (written by konmari, potentially others)
+.claude/
