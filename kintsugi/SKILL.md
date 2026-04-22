@@ -88,9 +88,19 @@ crack / gold / seam shape.
 
 ### 4. Wrap
 
-Produce the final artefact using `templates/bug-report.md` — useful
-for sticking in an issue, the PR description, or an internal incident
-log. It's also the durable version-two-you-reading-this-later document.
+Produce the final artefact. Two templates, pick by scope:
+
+- `templates/bug-report.md` — ordinary bug fixes (PR description,
+  issue write-up, feature regression).
+- `templates/postmortem.md` — incidents: anything that paged someone,
+  broke a customer workflow, caused data loss, or required a
+  rollback. Extends the bug-report shape with timeline, impact,
+  detection, contributing factors, a "where we got lucky" section for
+  latent risk, and blameless framing. Follows Google SRE postmortem
+  discipline.
+
+When in doubt, the postmortem is stricter — use it if the incident
+was user-visible or page-worthy.
 
 ## When not to use
 

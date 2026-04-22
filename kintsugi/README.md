@@ -42,8 +42,12 @@ cp -r kintsugi ~/.claude/skills/
   contract.
 - A named constant, helper, or narrow comment **only** when earned by
   the fix — not as default decoration.
-- A wrap-up bug report using `templates/bug-report.md` — goes in the
-  issue, the PR description, or an incident log.
+- A wrap-up using the right template for the scope:
+  - `templates/bug-report.md` — ordinary fixes (PR / issue).
+  - `templates/postmortem.md` — incidents (paged, user-visible
+    outage, data loss, rollback). Adds timeline, impact, detection,
+    contributing factors, and "where we got lucky" per Google SRE
+    blameless-postmortem discipline.
 
 ## Pairs with
 
