@@ -33,11 +33,15 @@ The same shape serves all three. Fill in after phase 3 completes.
 
 ### Seam
 
-Where the repair is visible:
+Where the repair is anchored, in order of durability:
 
-- Code: `{file:line}` — {named constant / helper / comment}
-- Test: `{file:line}` — `{test name}`
-- Doc (if applicable): `{file}` — {what was updated}
+- Test: `{file:line}` — `{behaviour-describing test name}` *(primary seam)*
+- Commit: `{sha}` — crack / gold / seam body
+- Changelog / doc (if the fix changed a user-visible contract):
+  `{file}` — {what was updated}
+- Code (only if the fix introduces a value or choice whose rationale
+  the code alone can't carry): `{file:line}` — {named constant /
+  helper / comment}. Omit this line if no code-level seam was earned.
 
 ### Out of scope
 
@@ -52,5 +56,6 @@ pass. Each filed separately if worth pursuing:
 - [ ] Fix lands; failing test runs green.
 - [ ] Adjacent tests for the same module still pass.
 - [ ] Adjacent-risk scan done (same-shape instances across codebase).
-- [ ] Seam left visible (code + commit + test + doc as applicable).
+- [ ] Seam left where it won't rot (test name + commit body; changelog
+      if contract changed; code-level only if earned).
 - [ ] Out-of-scope items recorded separately.

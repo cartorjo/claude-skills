@@ -1,6 +1,6 @@
 ---
 name: shokunin
-description: Master-craftsman code review. Scrutinizes a change through five lenses — necessity, precision, durability, kindness, silence — beyond what linters and correctness tests catch. Use for code review of PRs, files, or hunks; when the user says "review this like a craftsman", "give this a harsh review", "/shokunin", or explicitly asks for taste-level feedback. Also suitable as a self-review pass before opening a PR.
+description: Master-craftsman taste review. Scrutinizes an already-correct change through five lenses — necessity, precision, durability, kindness, silence — for what linters, tests, and ordinary review don't catch. Use when the user invokes `/shokunin`, asks for a "craftsman review", "taste review", "harsh/picky review", or explicitly asks for shokunin feedback. Not a replacement for general code review; run after correctness is established, or as a self-review pass before opening a PR.
 ---
 
 # shokunin — master-craftsman review
@@ -72,10 +72,12 @@ findings.
 Use `templates/review.md`. One section per lens. Each finding cites
 `file:line`. End with the overall verdict.
 
-### 4. No silent passes
+### 4. Silent passes stay silent
 
-Even if a lens finds nothing actionable, name one thing the code did
-well under that lens. A shokunin notices craft, not just flaws.
+If a lens found nothing actionable, don't write a section for it —
+list it in the silent-passes line at the end of the review. Don't
+force a "done well" bullet per lens; craft praise lives once in the
+overall verdict, only if earned.
 
 ## When not to use
 

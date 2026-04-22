@@ -55,8 +55,6 @@ Paste the offending snippet. Show the shorter version as the fix.
 - Every comment explains a *why* that wouldn't be obvious from
   reading the code.
 - Every line pays rent. Delete any that don't.
-- The shape of the code at a glance tells you the shape of the
-  problem.
 
 ## A warning
 

@@ -31,6 +31,9 @@ Per-lens findings at three severities:
 - **consider** — worth mentioning in review
 - **observed** — worth naming, not actioning
 
+Lenses with zero findings collapse to a one-line silent-passes
+mention — no filler "done well" bullets forced per lens.
+
 Full shape in `templates/review.md`.
 
 ## Pairs with

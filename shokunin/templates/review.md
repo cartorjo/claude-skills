@@ -1,7 +1,8 @@
 # Shokunin review template
 
-Fixed shape: context, five lens sections, overall verdict. Every
-finding carries `file:line` + a severity + a one-sentence justification.
+Fixed shape: context, lens sections (only where findings exist),
+silent-passes line, overall verdict. Every finding carries `file:line`
++ a severity + a one-sentence justification.
 
 ---
 
@@ -14,15 +15,23 @@ finding carries `file:line` + a severity + a one-sentence justification.
 ### Context (1 paragraph)
 
 {What this module does, what convention the surrounding code follows,
-whether this change is on a hot path / boundary / interior. This is
-for the author to confirm we're reviewing the same thing.}
+whether this change is on a hot path / boundary / interior. One
+paragraph so the author can confirm we're reviewing the same thing.}
 
 ---
 
-### Lens 1 — Necessity
+### Lens sections
+
+Render a section for each lens that has ≥ 1 finding. Skip lenses with
+zero findings — they go on the silent-passes line below. Do not add
+"Done well" bullets per lens; craft praise lives once in the overall
+verdict, only if earned.
+
+#### Lens N — {Necessity / Precision / Durability / Kindness / Silence}
 
 **Must-change** ({count})
-- `file:line` — {finding}. {existing thing it duplicates, with `file:line`}
+- `file:line` — {finding}. {evidence: what it duplicates, how it
+  fails, the shorter version, etc.}
 
 **Consider** ({count})
 - `file:line` — {finding}.
@@ -30,35 +39,16 @@ for the author to confirm we're reviewing the same thing.}
 **Observed** ({count})
 - `file:line` — {finding}.
 
-**Done well**
-- {one thing the author got right under this lens.}
-
-**Read:** {one-line verdict: "No new entities earn their place" / "Two
-consumers justify the new abstraction" / etc.}
+**Read:** {one-line verdict: "No new entities earn their place" /
+"Error handling points the wrong way in two places" / etc.}
 
 ---
 
-### Lens 2 — Precision
+### Silent passes
 
-{same shape as Lens 1}
-
----
-
-### Lens 3 — Durability
-
-{same shape}
-
----
-
-### Lens 4 — Kindness
-
-{same shape}
-
----
-
-### Lens 5 — Silence
-
-{same shape}
+{One line listing the lenses that found nothing actionable, e.g.
+"No findings: Necessity, Precision, Kindness." Omit this subsection
+entirely if every lens had at least one finding.}
 
 ---
 
@@ -73,11 +63,13 @@ One of:
 - **Structural rethink.** (Must-change findings that indicate the
   approach, not the code, needs revision.)
 
-### What the author did well
+### What the author did well (only if earned)
 
-{2–3 bullets of real craft. Not "looks good" — name specifics.}
+{2–3 bullets of real craft, each cited to `file:line`. Skip this
+subsection entirely if nothing stands out — forced praise is worse
+than none.}
 
 ### Top three things to change
 
-{If any must-change or high-confidence consider findings — the
-author's reading list in priority order.}
+{If there are must-change or high-confidence consider findings — the
+author's reading list in priority order. If none, write "None.".}

@@ -14,8 +14,10 @@ Gold:
 what the code now does that it didn't before.>
 
 Seam:
-<one line: where to look if this resurfaces — the named constant, the
-test, the helper. Not the ticket number alone; the code landmark.>
+<one line: where the behaviour is now anchored. Usually the test path
++ name — that's the durable guard. A named helper or constant
+introduced by the fix goes here too. Not the ticket number alone;
+that rots.>
 ```
 
 ## Subject line

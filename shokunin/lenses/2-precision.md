@@ -53,4 +53,3 @@ describe the surprise in one sentence.
   model of the module.
 - Errors fail in the direction of the code that can meaningfully
   respond to them.
-- No "clever" — boring, precise, done.

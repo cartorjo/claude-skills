@@ -1,6 +1,6 @@
 ---
 name: kintsugi
-description: Bug-hygiene ritual. Three phases — name the crack, pour the gold, show the seam. Turns a bug fix into a durable artefact: reproduction, failing test that becomes the passing test, and a visible seam in code + commit + comment so future readers see where the repair is. Use when the user reports a bug, says "fix this bug", "/kintsugi", "investigate this issue", or posts a stack trace. Also suitable for post-incident write-ups.
+description: Bug-hygiene ritual. Three phases — name the crack, pour the gold, show the seam. Turns a bug fix into a durable artefact: reproduction, failing test that becomes the passing test, and a seam anchored in test name + commit body + changelog so future readers see where the repair is. Use when the user reports a bug, says "fix this bug", "/kintsugi", "investigate this issue", or posts a stack trace. Also suitable for post-incident write-ups.
 ---
 
 # kintsugi — bug hygiene
@@ -14,8 +14,8 @@ Three phases. In order. Skip none.
 
 1. **Name the crack** — reproduce, characterise, scope. No fix yet.
 2. **Pour the gold** — failing test first; fix second. In that order.
-3. **Show the seam** — leave the repair visible in code, commit, and
-   comment.
+3. **Show the seam** — anchor the repair in test + commit body +
+   changelog; sweep for same-shape defects elsewhere.
 
 ## Invariants
 
@@ -25,11 +25,17 @@ Three phases. In order. Skip none.
 2. **Failing test before fix.** The test goes in a commit *before* the
    fix, or at worst in the same commit but written first. If the test
    passes before the fix, it isn't testing the bug.
-3. **Visible seam.** Don't hide the repair. A comment, a named
-   constant, a log, or a docstring points to the bug ticket / commit
-   that motivated the fix. The seam is the artefact.
+3. **Seam lives where it won't rot.** The durable record of the
+   repair is the failing-test-turned-passing-test (its name describes
+   the behaviour), the commit body (crack / gold / seam shape), and a
+   changelog entry if the contract changed. Code-level seams — named
+   constants, narrow comments — only when the fix introduces a value
+   or choice whose rationale a future reader couldn't infer. "Fixes
+   #1234" decorative comments rot; they are not seams.
 4. **Scope is the bug.** Kintsugi is not a refactor. If you see other
    problems, note them separately — don't fold them into this fix.
+   Defensive assertions across "similar" code are scope creep, not
+   gold.
 
 ## Phases
 
@@ -37,7 +43,7 @@ Run in order. Each phase produces a concrete output.
 
 1. `phases/1-name-the-crack.md` — reproduce, characterise, scope.
 2. `phases/2-pour-the-gold.md` — failing test, then fix.
-3. `phases/3-show-the-seam.md` — leave visible repair evidence.
+3. `phases/3-show-the-seam.md` — durable seam (test + commit + changelog); adjacent-risk sweep.
 
 ## Workflow
 
@@ -73,9 +79,12 @@ Run adjacent tests — confirm no regression.
 
 ### 3. Show the seam
 
-Read `phases/3-show-the-seam.md`. Leave the visible repair: a named
-comment, a named constant, a log, or a CHANGELOG entry. Use the commit
-template (`templates/commit.md`) with the crack / gold / seam shape.
+Read `phases/3-show-the-seam.md`. The seam lives in durable places —
+the test name, the commit body, the changelog — not in decorative
+code comments. Then do an adjacent-risk sweep: anywhere else in the
+codebase with the same defect shape? Same-shape instances are in
+scope; unrelated cleanup isn't. Use `templates/commit.md` with the
+crack / gold / seam shape.
 
 ### 4. Wrap
 

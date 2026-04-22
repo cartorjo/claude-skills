@@ -50,21 +50,14 @@ Smallest fix that turns red to green. Guidelines:
   Data fixes may need a separate migration — note it in the out-of-
   scope list from phase 1.
 
-### 2.4 Adjacent risks
-
-Before ending phase 2, ask: what else in the code has the *same shape*
-as the defect? If the bug was "forgot to escape a form value", is the
-fix applied consistently in the adjacent eight form values? If not,
-that's still in scope — the bug is the pattern, not the instance.
-
 ## Output
 
 - One (or more) commits introducing the failing test.
 - One commit with the fix. Uses the commit template from
   `templates/commit.md`.
-- A paragraph documenting adjacent-risk findings (either "all same-
-  shape instances fixed" or "N other instances noted, filed
-  separately").
+
+(Adjacent-risk sweep — "same defect shape elsewhere?" — happens in
+phase 3, not here. Phase 2's scope is *this* bug.)
 
 ## Anti-patterns
 

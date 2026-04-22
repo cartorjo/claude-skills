@@ -52,8 +52,6 @@ Quote the unkindness verbatim. "This error reads `Error: xxx` — a
 
 ## What good looks like
 
-- The code reads like a short essay: sections, flow, the right
-  amount said.
 - When it fails, it tells you *why*, not just *that*.
 - The next reader's first hour is spent understanding *what to
   change*, not *how the code works*.
