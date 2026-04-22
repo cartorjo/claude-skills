@@ -26,6 +26,12 @@ three severities: **must-change**, **consider**, **observed**.
 4. **The next reader is the audience.** Not the author, not the reviewer.
    "Will someone debugging this at 3am six months from now thank the
    author?" is the durable test.
+5. **Bounded pass.** Cisco/SmartBear's peer-review study found defect
+   detection drops sharply beyond ~400 lines of diff in a single
+   review, and pace slower than ~500 LOC/hour. If the change exceeds
+   the budget, *split* — by subsystem, by file group, or one lens at
+   a time across the full diff — and name the split in the review. A
+   2000-line single-pass shokunin isn't a shokunin; it's theatre.
 
 ## Lenses
 
@@ -51,6 +57,21 @@ Determine what's being reviewed:
 
 If ambiguous, ask. Don't review the whole repo unless that's literally
 what was asked for.
+
+**Size check.** Count changed lines (`git diff --shortstat` or the
+PR's `+X/-Y`). If the total exceeds ~400, surface a split before
+starting. Options:
+
+- **By subsystem** — e.g., backend files one pass, frontend another.
+  Best when the PR spans domains.
+- **By file group** — split the diff roughly in half by `file:line`
+  range. Best when files are homogeneous.
+- **By lens** — run all five lenses against slice A, then slice B.
+  Best when the diff is cohesive and a single split line is hard.
+
+Name the split in the review ("Pass 1 of 2: backend/*"). A single
+pass over 2000 LOC will silently miss findings — say so, propose the
+split, and let the user confirm.
 
 ### 1. Context pass
 

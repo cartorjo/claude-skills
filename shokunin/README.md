@@ -15,6 +15,10 @@ cp -r shokunin ~/.claude/skills/
   auto-triggers.
 - Use as a self-review pass before opening a PR.
 
+For diffs > ~400 LOC the skill proposes a split before reviewing —
+Cisco/SmartBear's peer-review study found defect detection collapses
+past that threshold in a single pass.
+
 ## The five lenses
 
 1. **Necessity** — does this code need to exist?
